@@ -15,9 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     //  - Do not include https://
     //  - This must be an exact match of your domain.
     //  - If you're using www. for your domain, make sure you include that here.
-    load('PECJVOQV', {
-      includedDomains: ['runwasm.com', 'www.runwasm.com'],
-    })
+    // load('PECJVOQV', {
+    //   includedDomains: ['runwasm.com', 'www.runwasm.com'],
+    // })
 
     function onRouteChangeComplete() {
       trackPageview()

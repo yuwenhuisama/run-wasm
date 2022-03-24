@@ -12,7 +12,7 @@ declare global {
   }
 }
 
-const initialCode = `# Implementation of the Sieve of Eratosthenes
+const findPrimesCode = `# Implementation of the Sieve of Eratosthenes
 # https://stackoverflow.com/questions/3939660/sieve-of-eratosthenes-finding-primes-python
 
 # Finds all prime numbers up to n
@@ -25,6 +25,14 @@ def eratosthenes(n):
                 multiples.append(j)
 
 eratosthenes(100)`
+
+const snakeCode = `print('hello world')`
+
+const initialCodeMap = new Map<string, string>([
+  ['findPrimes', findPrimesCode],
+  ['snake', snakeCode],
+  ['costumeCode', ''],
+])
 
 function App() {
   const [pyodide, setPyodide] = useState(null)
@@ -52,7 +60,7 @@ function App() {
         strategy="beforeInteractive"
       />
       <CodeRunnerUI
-        initialCode={initialCode}
+        initialCodeMap={initialCodeMap}
         onRunCode={runCode}
         languageLabel="Python"
         isLoading={!pyodide}

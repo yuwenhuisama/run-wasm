@@ -17,6 +17,8 @@ a = 12;
 b = 3;
 console.log(a + b);`
 
+const initialCodeMap = new Map<string, string>([['initialCode', initialCode]])
+
 function App() {
   const [errors, setErrors] = useState<Array<string>>([])
   const [tsClient, setTsClient] = useState<any>(null)
@@ -53,7 +55,7 @@ function App() {
       <Script strategy="beforeInteractive" src={tsScript} />
       <Script src="https://kit.fontawesome.com/137d63e13e.js" />
       <CodeRunnerUI
-        initialCode={initialCode}
+        initialCodeMap={initialCodeMap}
         languageLabel="TypeScript"
         defaultLanguage="typescript"
         onRunCode={runCode}

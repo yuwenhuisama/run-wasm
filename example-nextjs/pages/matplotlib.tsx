@@ -39,6 +39,10 @@ f.canvas.create_root_element = get_render_element.__get__(
     get_render_element, f.canvas.__class__
 )`
 
+const initialCodeMap = new Map<string, string>([
+  ['initialCode', preloadMatplotlibCode],
+])
+
 function App() {
   const [pyodide, setPyodide] = useState(null)
 
@@ -79,7 +83,7 @@ function App() {
       />
       <Script src="https://kit.fontawesome.com/137d63e13e.js" />
       <CodeRunnerUI
-        initialCode={initialCode}
+        initialCodeMap={initialCodeMap}
         onRunCode={runCode}
         languageLabel="Matplotlib"
         hideOutputEditor

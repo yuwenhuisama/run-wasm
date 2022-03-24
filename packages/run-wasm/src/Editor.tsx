@@ -13,6 +13,7 @@ interface Props {
   defaultLanguage?: string
   onRunCode(inputCode: string): Promise<string | void>
   children?: React.ReactNode
+  onCodeChanged(code: string): void
 }
 
 export default function Editor(props: Props) {
@@ -25,9 +26,9 @@ export default function Editor(props: Props) {
     defaultLanguage,
     onRunCode,
     children,
+    onCodeChanged,
   } = props
 
-  const inputCodeRef = React.useRef(initialCode)
   const editorRef = React.useRef(null)
 
   const [monaco, setMonaco] = React.useState<Monaco | null>(null)
@@ -44,7 +45,7 @@ export default function Editor(props: Props) {
     const runCodeBinding: CustomKeyBinding = {
       label: 'run',
       keybinding: monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
-      callback: () => onRunCode(inputCodeRef.current),
+      callback: () => onRunCode(initialCode),
       editor: editorRef.current,
     }
     return addKeyBinding(runCodeBinding)
@@ -69,10 +70,11 @@ export default function Editor(props: Props) {
               <MonacoEditor
                 height="20rem"
                 defaultLanguage={defaultLanguage}
-                defaultValue={inputCodeRef.current}
+                defaultValue={initialCode}
                 onChange={(value) => {
-                  inputCodeRef.current = value || ''
+                  onCodeChanged(value || '')
                 }}
+                value={initialCode}
                 theme="vs-dark"
                 options={{
                   fontSize: 12,
@@ -88,7 +90,7 @@ export default function Editor(props: Props) {
 
       <div style={{ padding: '2rem 0' }}>
         <button
-          onClick={() => onRunCode(inputCodeRef.current)}
+          onClick={() => onRunCode(initialCode)}
           disabled={isLoading}
           style={{
             borderRadius: '.5rem',

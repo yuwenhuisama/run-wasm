@@ -23,16 +23,16 @@ export default function Navbar({ current }) {
         href: '/',
         current: current === 'Home' || current === 'Python',
       },
-      {
-        name: 'Matplotlib',
-        href: '/matplotlib',
-        current: current === 'Matplotlib',
-      },
-      {
-        name: 'TypeScript',
-        href: '/ts',
-        current: current === 'TypeScript',
-      },
+      // {
+      //   name: 'Matplotlib',
+      //   href: '/matplotlib',
+      //   current: current === 'Matplotlib',
+      // },
+      // {
+      //   name: 'TypeScript',
+      //   href: '/ts',
+      //   current: current === 'TypeScript',
+      // },
     ],
     [current]
   )
@@ -43,7 +43,15 @@ export default function Navbar({ current }) {
           <>
             <div className="px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between h-16">
-                <a aria-label="Home" href="https://www.runwasm.com">
+                <a
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  aria-label="Home"
+                  href="https://www.microsoft.com/en-us/edge"
+                >
                   <Logo className="h-10 my-3 w-36 dark:filter dark:invert" />
                 </a>
                 <div className="flex">
