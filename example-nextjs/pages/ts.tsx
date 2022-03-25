@@ -17,7 +17,13 @@ a = 12;
 b = 3;
 console.log(a + b);`
 
-const initialCodeMap = new Map<string, string>([['initialCode', initialCode]])
+const snakeCode = `print('hello world')`
+
+const initialCodeMap = new Map<string, string>([
+  ['Initial Code', initialCode],
+  ['Snake', snakeCode],
+  ['Costume Code', ''],
+])
 
 function App() {
   const [errors, setErrors] = useState<Array<string>>([])

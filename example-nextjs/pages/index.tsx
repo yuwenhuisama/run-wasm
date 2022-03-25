@@ -29,9 +29,9 @@ eratosthenes(100)`
 const snakeCode = `print('hello world')`
 
 const initialCodeMap = new Map<string, string>([
-  ['findPrimes', findPrimesCode],
-  ['snake', snakeCode],
-  ['costumeCode', ''],
+  ['Find Primes', findPrimesCode],
+  ['Snake', snakeCode],
+  ['Costume Code', ''],
 ])
 
 function App() {

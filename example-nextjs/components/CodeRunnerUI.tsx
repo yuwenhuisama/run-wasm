@@ -16,12 +16,6 @@ interface Props {
   hideOutputEditor?: boolean
 }
 
-const selections = [
-  { value: 'findPrimes', label: 'FindPrimes' },
-  { value: 'snake', label: 'Snake' },
-  { value: 'costumeCode', label: 'CostumeCode' },
-]
-
 export default function CodeRunnerUI(props: Props) {
   const {
     initialCodeMap,
@@ -33,12 +27,14 @@ export default function CodeRunnerUI(props: Props) {
     onRunCode,
   } = props
 
+  const selections = []
+
+  initialCodeMap.forEach((v, k, m) => selections.push({ label: k, value: k }))
+
   const [output, setOutput] = React.useState('')
   const [selection, setSelection] = React.useState(selections[0])
   const [code, setCode] = React.useState(initialCodeMap.get(selection.value))
   const { theme, setTheme } = useTheme()
-
-  console.log('theme', theme)
 
   const handleSelectionChanged = (selection) => {
     setSelection(selection)
@@ -62,10 +58,6 @@ export default function CodeRunnerUI(props: Props) {
       // borderColor: state.isFocused ? "yellow" : "green",
       // Removes weird border around container
       boxShadow: state.isFocused ? null : null,
-      // "&:hover": {
-      //   // Overwrittes the different states of border
-      //   borderColor: state.isFocused ? "red" : "blue"
-      // }
     }),
     menu: (base) => ({
       ...base,
@@ -81,21 +73,6 @@ export default function CodeRunnerUI(props: Props) {
     }),
   }
 
-  const dot = (color = 'transparent') => ({
-    alignItems: 'center',
-    display: 'flex',
-
-    ':before': {
-      backgroundColor: color,
-      borderRadius: 10,
-      content: '" "',
-      display: 'block',
-      marginRight: 8,
-      height: 10,
-      width: 10,
-    },
-  })
-
   const customStylesDark = {
     control: (base, state) => ({
       ...base,
@@ -106,10 +83,6 @@ export default function CodeRunnerUI(props: Props) {
       // borderColor: state.isFocused ? "yellow" : "green",
       // Removes weird border around container
       boxShadow: state.isFocused ? null : null,
-      // "&:hover": {
-      //   // Overwrittes the different states of border
-      //   borderColor: state.isFocused ? "red" : "blue"
-      // }
     }),
     menu: (base) => ({
       ...base,
@@ -117,17 +90,17 @@ export default function CodeRunnerUI(props: Props) {
       borderRadius: 0,
       // kill the gap
       marginTop: 0,
-      background: '#222222',
+      background: '#222',
     }),
     menuList: (base) => ({
       ...base,
       // kill the white space on first and last option
       padding: 0,
-      background: '#222222',
+      background: '#222',
     }),
     singleValue: (base) => ({
       ...base,
-      color: '#aaaaaa',
+      color: '#aaa',
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,

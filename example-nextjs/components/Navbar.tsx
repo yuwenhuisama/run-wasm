@@ -19,7 +19,7 @@ export default function Navbar({ current }) {
   const navigation = React.useMemo(
     () => [
       {
-        name: 'Home',
+        name: 'Python',
         href: '/',
         current: current === 'Home' || current === 'Python',
       },
@@ -28,11 +28,11 @@ export default function Navbar({ current }) {
       //   href: '/matplotlib',
       //   current: current === 'Matplotlib',
       // },
-      // {
-      //   name: 'TypeScript',
-      //   href: '/ts',
-      //   current: current === 'TypeScript',
-      // },
+      {
+        name: 'TypeScript',
+        href: '/ts',
+        current: current === 'TypeScript',
+      },
     ],
     [current]
   )
