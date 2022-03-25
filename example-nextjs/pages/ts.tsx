@@ -17,11 +17,80 @@ a = 12;
 b = 3;
 console.log(a + b);`
 
-const snakeCode = `print('hello world')`
+const snakeCode = `
+const mycanvas = document.getElementById("canvas") as HTMLCanvasElement;
+const ctx = mycanvas.getContext("2d");
+
+//创建一个数组
+const circleArr = [];
+
+//圆形类
+class Circle {
+  x: number
+  y: number
+  r: number
+  dx: number
+  dy: number
+  color: string
+
+  constructor(x: number, y: number, r: number, ) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    // 颜色的取值范围
+    this.color = "rgb("+ (Math.random() * 240 ) + 9 + ","+ (Math.random() * 220 +18) +",203)";
+
+    //随机方向
+    this.dx = Math.random() * 12 - 7;
+    this.dy = Math.random() * 12 - 7;
+    //往数组中push自己
+    circleArr.push(this);
+  }
+
+  render() {
+    //新建一条路径
+    ctx.beginPath();
+    //创建一个圆
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI*2, true);
+    //设置样式颜色
+    ctx.fillStyle = this.color;
+    //通过填充路径的内容区域生成实心的图形
+    ctx.fill();
+  }
+
+  update() {
+    this.x += this.dx;
+    this.y += this.dy;
+    this.r--;
+    if(this.r < 0){
+      for (var i = 0; i < circleArr.length; i++) {
+        if (circleArr[i] === this) {
+            circleArr.splice(i,1);
+        };
+      }
+      return false;
+    }
+    return true;
+  }
+}
+
+//鼠标移动事件
+mycanvas.onmousemove = (event) => {
+  new Circle(event.offsetX, event.offsetY, 30);
+}
+
+//设置定时器每20毫秒更新和渲染
+setInterval(() => {
+  ctx.clearRect(0, 0, 800, 500)
+  for (let i = 0; i < circleArr.length; i++) {
+      circleArr[i].update() && circleArr[i].render();
+  };
+},20);
+`
 
 const initialCodeMap = new Map<string, string>([
   ['Initial Code', initialCode],
-  ['Snake', snakeCode],
+  ['Circles', snakeCode],
   ['Costume Code', ''],
 ])
 

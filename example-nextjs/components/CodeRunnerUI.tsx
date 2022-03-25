@@ -35,10 +35,16 @@ export default function CodeRunnerUI(props: Props) {
   const [selection, setSelection] = React.useState(selections[0])
   const [code, setCode] = React.useState(initialCodeMap.get(selection.value))
   const { theme, setTheme } = useTheme()
+  const [canvasHidden, setCanvasHidden] = React.useState(true)
 
   const handleSelectionChanged = (selection) => {
     setSelection(selection)
     setCode(initialCodeMap.get(selection.value))
+    if (selection.value == 'Writing' || selection.value == 'Circles') {
+      setCanvasHidden(false)
+    } else {
+      setCanvasHidden(true)
+    }
   }
 
   async function runCode(code: string) {
@@ -141,6 +147,17 @@ export default function CodeRunnerUI(props: Props) {
             </div>
           </main>
         </div>
+
+        {!canvasHidden ? (
+          <canvas
+            id="canvas"
+            width={canvasHidden ? 0 : 800}
+            height={canvasHidden ? 0 : 500}
+          >
+            Your browser does not support the Canvas API. Please upgrade your
+            browser.
+          </canvas>
+        ) : null}
 
         <div>
           <div style={{ padding: '5px 0px 15px 0px' }}>

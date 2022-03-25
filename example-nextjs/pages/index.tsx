@@ -26,11 +26,46 @@ def eratosthenes(n):
 
 eratosthenes(100)`
 
-const snakeCode = `print('hello world')`
+const writingCode = `
+from js import document
+canvas = document.getElementById('canvas')
+canvas.setAttribute('width', 800)
+canvas.setAttribute('height', 500)
+context = canvas.getContext("2d")
+context.strokeStyle = "#df4b26"
+context.lineJoin = "round"
+context.lineWidth = 8
+pen = False
+lastPoint = (0, 0)
+
+def onmousemove(e):
+  global lastPoint
+  if pen:
+    newPoint = (e.offsetX, e.offsetY)
+    context.beginPath()
+    context.moveTo(lastPoint[0], lastPoint[1])
+    context.lineTo(newPoint[0], newPoint[1])
+    context.closePath()
+    context.stroke()
+    lastPoint = newPoint
+    
+def onmousedown(e):
+  global pen, lastPoint
+  pen = True
+  lastPoint = (e.offsetX, e.offsetY)
+  
+def onmouseup(e):
+  global pen
+  pen = False
+
+canvas.addEventListener('mousemove', onmousemove)
+canvas.addEventListener('mousedown', onmousedown)
+canvas.addEventListener('mouseup', onmouseup)
+`
 
 const initialCodeMap = new Map<string, string>([
   ['Find Primes', findPrimesCode],
-  ['Snake', snakeCode],
+  ['Writing', writingCode],
   ['Costume Code', ''],
 ])
 
